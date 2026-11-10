@@ -50,7 +50,38 @@ A marker must fill a table cell, with optional surrounding padding. Both header 
 
 The table plugin works alongside [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) in either registration order. Its default ID prefix differs from the task-list plugin’s `cbx_` prefix. If you customize the prefixes, keep them distinct.
 
-In an Eleventy project such as [Greenroom](https://github.com/eggplantpasta/greenroom), install the package in the site project. Add the `.use(tableCheckbox)` call to the markdown-it instance in `.eleventy.js` before passing it to `eleventyConfig.setLibrary`. Keep your existing parser options and plugins. A minimal CommonJS configuration using both plugins looks like this:
+### Greenroom
+
+[Greenroom](https://github.com/eggplantpasta/greenroom) uses Build Awesome One on top of Eleventy. Its build dependencies live in `.build`, and it uses markdown-it 14.3.1 in the current lockfile.
+
+From the root of a Greenroom checkout, install the packed plugin:
+
+```sh
+npm --prefix .build install /path/to/markdown-it-table-checkbox-1.0.0.tgz
+```
+
+After npm publication, use `npm --prefix .build install markdown-it-table-checkbox`. For a site build on another machine, install from npm or make the tarball available to that build.
+
+In [`.build/greenroom.config.js`](https://github.com/eggplantpasta/greenroom/blob/main/.build/greenroom.config.js), add the import:
+
+```js
+import tableCheckbox from 'markdown-it-table-checkbox';
+```
+
+Extend the existing Markdown hook:
+
+```js
+$config.amendLibrary("md", (mdLib) => {
+  mdLib.use(markdownItTaskCheckbox);
+  mdLib.use(tableCheckbox);
+});
+```
+
+Add a table to a Markdown post, run `npm --prefix .build run build`, and check the rendered post in `.build/_site/`.
+
+### Other Eleventy projects
+
+Register the plugin on your existing markdown-it instance. If you configure the library yourself, a minimal CommonJS example is:
 
 ```js
 const MarkdownIt = require('markdown-it');
@@ -66,7 +97,7 @@ module.exports = function (eleventyConfig) {
 };
 ```
 
-Use the default markdown-it preset, or enable its `table` rule explicitly with `md.enable('table')` when using a preset that disables it. Add a table to a Markdown page and run the site build to verify the result. Greenroom documents `npm run build` for this step.
+Use the default markdown-it preset, or enable its `table` rule explicitly with `md.enable('table')` when using a preset that disables it.
 
 GitHub’s Markdown renderer uses its own parser. To see the checkboxes on GitHub Pages, render the Markdown with Eleventy and publish the generated HTML.
 
