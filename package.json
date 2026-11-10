@@ -1,0 +1,24 @@
+{
+  "name": "markdown-it-table-checkbox",
+  "version": "1.0.0",
+  "description": "Render standalone checkbox markers in markdown-it table cells.",
+  "keywords": ["markdown-it", "markdown-it-plugin", "markdown", "table", "checkbox"],
+  "author": "eggplantpasta",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "index.js",
+  "exports": "./index.js",
+  "files": ["index.js"],
+  "scripts": {
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "markdown-it": "^13.0.0 || ^14.0.0 || ^15.0.0"
+  },
+  "devDependencies": {
+    "markdown-it": "^15.0.0",
+    "markdown-it-v13": "npm:markdown-it@^13.0.0",
+    "markdown-it-v14": "npm:markdown-it@^14.0.0",
+    "markdown-it-task-checkbox": "1.0.6"
+  }
+}
