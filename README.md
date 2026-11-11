@@ -111,7 +111,7 @@ npm test
 npm pack --dry-run
 ```
 
-When the GitHub repository is created, add its URL to the `repository` field in `package.json` and push the project. To release on npm, sign in with the publishing account, confirm the package name, and run `npm publish`.
+To release on npm, sign in with the publishing account, confirm the package name, and run `npm publish`.
 
 ## License
 
