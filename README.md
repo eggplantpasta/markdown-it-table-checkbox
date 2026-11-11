@@ -4,13 +4,13 @@ Render `[x]`, `[X]` and `[ ]` as checkboxes in Markdown tables. Works with markd
 
 ## Install
 
-After the package is published to npm, run:
+Install the packaged GitHub release in the project where you want to use it:
 
 ```sh
-npm install markdown-it markdown-it-table-checkbox
+npm install https://github.com/eggplantpasta/markdown-it-table-checkbox/releases/download/v1.0.0/markdown-it-table-checkbox-1.0.0.tgz
 ```
 
-To try the package before publication, run `npm pack` in this repository. In the project where you want to use it, run `npm install /path/to/markdown-it-table-checkbox-1.0.0.tgz`. Keep your existing markdown-it dependency if it is in the supported range.
+Use an existing supported version of markdown-it or install it with `npm install markdown-it`.
 
 ## Use
 
@@ -50,36 +50,7 @@ A marker must fill a table cell, with optional surrounding padding. Both header 
 
 The table plugin works alongside [markdown-it-task-checkbox](https://github.com/linsir/markdown-it-task-checkbox) in either registration order. Its default ID prefix differs from the task-list plugin’s `cbx_` prefix. If you customize the prefixes, keep them distinct.
 
-### Greenroom
-
-[Greenroom](https://github.com/eggplantpasta/greenroom) uses Build Awesome One on top of Eleventy. Its build dependencies live in `.build`, and it uses markdown-it 14.3.1 in the current lockfile.
-
-From the root of a Greenroom checkout, install the packed plugin:
-
-```sh
-npm --prefix .build install /path/to/markdown-it-table-checkbox-1.0.0.tgz
-```
-
-After npm publication, use `npm --prefix .build install markdown-it-table-checkbox`. For a site build on another machine, install from npm or make the tarball available to that build.
-
-In [`.build/greenroom.config.js`](https://github.com/eggplantpasta/greenroom/blob/main/.build/greenroom.config.js), add the import:
-
-```js
-import tableCheckbox from 'markdown-it-table-checkbox';
-```
-
-Extend the existing Markdown hook:
-
-```js
-$config.amendLibrary("md", (mdLib) => {
-  mdLib.use(markdownItTaskCheckbox);
-  mdLib.use(tableCheckbox);
-});
-```
-
-Add a table to a Markdown post, run `npm --prefix .build run build`, and check the rendered post in `.build/_site/`.
-
-### Other Eleventy projects
+### Eleventy
 
 Register the plugin on your existing markdown-it instance. If you configure the library yourself, a minimal CommonJS example is:
 
@@ -101,15 +72,17 @@ Use the default markdown-it preset, or enable its `table` rule explicitly with `
 
 GitHub’s Markdown renderer uses its own parser. To see the checkboxes on GitHub Pages, render the Markdown with Eleventy and publish the generated HTML.
 
-## Test and release
+## Development and release
 
 Use Node.js 22 or newer for local development.
 
 ```sh
 npm ci
 npm test
-npm pack --dry-run
+npm pack
 ```
+
+Edit `index.js` and run `npm test` again. To try the changed code in another project, install the tarball produced by `npm pack`. Bump the version before publishing a new release.
 
 To release on npm, sign in with the publishing account, confirm the package name, and run `npm publish`.
 
