@@ -4,13 +4,13 @@ Render `[x]`, `[X]` and `[ ]` as checkboxes in Markdown tables. Works with markd
 
 ## Install
 
-Install the packaged GitHub release in the project where you want to use it:
+Install the plugin in the project where you want to use it:
 
 ```sh
-npm install https://github.com/eggplantpasta/markdown-it-table-checkbox/releases/download/v1.0.0/markdown-it-table-checkbox-1.0.0.tgz
+npm install markdown-it-table-checkbox
 ```
 
-Use an existing supported version of markdown-it or install it with `npm install markdown-it`.
+Use an existing supported version of markdown-it or install it with `npm install markdown-it`. An installable tarball is also available from [GitHub Releases](https://github.com/eggplantpasta/markdown-it-table-checkbox/releases).
 
 ## Use
 
